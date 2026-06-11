@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buscador de análisis por código</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-block">
+      <img src="assets/logo-rionegro.jpg" alt="Gobierno de Río Negro" class="brand-logo">
+      <div>
+        <h1>Buscador de análisis por código</h1>
+        <p>Primero filtrás los análisis del Excel por código. Después decidís cuáles agregar al presupuesto.</p>
+      </div>
+    </div>
+
+    <div class="header-card">
+      <span>Catálogo</span>
+      <strong id="totalCatalogo">0</strong>
+      <small>ítems importados</small>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="search-section card">
+      <div class="section-title">
+        <div>
+          <span class="overline">Paso 1</span>
+          <h2>Filtrar por código</h2>
+        </div>
+        <button id="limpiarBusqueda" class="btn btn-soft" type="button">Limpiar búsqueda</button>
+      </div>
+
+      <div class="search-grid">
+        <label class="field main-field">
+          <span>Código del Excel</span>
+          <input id="codigoBusqueda" type="search" autocomplete="off" placeholder="Ej: F A, FA1, M R, C A 3...">
+        </label>
+
+        <label class="field">
+          <span>Anexo</span>
+          <select id="filtroAnexo">
+            <option value="TODOS">Todos</option>
+            <option value="ANEXO II">Análisis / determinaciones</option>
+            <option value="ANEXO I">Servicios / fiscalización</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="examples">
+        <span>Probar:</span>
+        <button type="button" class="chip" data-code="F A">F A</button>
+        <button type="button" class="chip" data-code="C A">C A</button>
+        <button type="button" class="chip" data-code="M R">M R</button>
+        <button type="button" class="chip" data-code="A 02">A 02</button>
+      </div>
+
+      <div class="result-header">
+        <div>
+          <strong id="textoResultados">Sin búsqueda activa</strong>
+          <small id="ayudaResultados">Escribí al menos una letra o número del código.</small>
+        </div>
+        <span id="contadorResultados" class="pill">0 resultados</span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Anexo</th>
+              <th>Unidad</th>
+              <th>Unid.</th>
+              <th>Precio unitario</th>
+              <th>Cant.</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tablaResultados">
+            <tr>
+              <td colspan="8" class="empty">No se ha encontrado nada todavía.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <aside class="side-column">
+      <section class="card values-card">
+        <div class="section-title compact">
+          <div>
+            <span class="overline">Valores del mes</span>
+            <h2 id="periodoValores">Junio 2026</h2>
+          </div>
+          <button id="restaurarValores" class="btn btn-soft" type="button">Restaurar</button>
+        </div>
+
+        <div class="values-grid">
+          <label class="field">
+            <span>UA</span>
+            <input id="valorUA" type="number" step="0.01">
+          </label>
+
+          <label class="field">
+            <span>UF</span>
+            <input id="valorUF" type="number" step="0.01">
+          </label>
+
+          <label class="field">
+            <span>Nafta</span>
+            <input id="valorNAFTA" type="number" step="0.01">
+          </label>
+
+          <label class="field">
+            <span>Dólar</span>
+            <input id="valorDOLAR" type="number" step="0.01">
+          </label>
+        </div>
+
+        <div class="source-status">
+          <span class="overline">Fuente de valores</span>
+          <p id="estadoDrive" class="status">Cargando valores vigentes...</p>
+        </div>
+      </section>
+
+      <section class="card budget-card">
+        <div class="section-title compact">
+          <div>
+            <span class="overline">Paso 2</span>
+            <h2>Presupuesto</h2>
+          </div>
+          <button id="vaciarPresupuesto" class="btn btn-soft danger" type="button">Vaciar</button>
+        </div>
+
+        <div id="listaPresupuesto" class="budget-list">
+          <div class="empty-box">Todavía no agregaste análisis.</div>
+        </div>
+
+        <div class="total-box">
+          <span>Total estimado</span>
+          <strong id="totalPresupuesto">$ 0,00</strong>
+        </div>
+
+        <div class="actions">
+          <button id="exportarCsv" class="btn btn-primary" type="button">Exportar CSV</button>
+          <button id="imprimir" class="btn btn-outline" type="button">Imprimir</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="app-footer">
+    <p>
+      Desarrollado por
+      <a href="https://pompone.github.io/CV_Pompone.github.io/" target="_blank" rel="noopener noreferrer">
+        Alejandro M. Pompone
+      </a>
+    </p>
+  </footer>
+
+  <div id="avisoAranceles" class="ajax-alert hidden">
+    <div class="ajax-alert-box">
+      <div class="spinner"></div>
+      <div>
+        <strong>Atención</strong>
+        <p>Los valores de Aranceles no han sido actualizados todavía.</p>
+      </div>
+      <button id="cerrarAvisoAranceles" type="button">×</button>
+    </div>
+  </div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
