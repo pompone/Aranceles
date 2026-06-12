@@ -2,7 +2,6 @@ const GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1gQmH3CKwISJKg4
 
 const MODO_PRUEBA_AVISO = false;
 
-
 const state = {
   catalogo: Array.isArray(window.CATALOGO_INICIAL) ? window.CATALOGO_INICIAL : [],
   valores: { ...(window.VALORES_INICIALES || {}) },
@@ -57,7 +56,7 @@ function aplicarValores(nuevosValores, fuenteTexto = 'Valores actualizados') {
 }
 
 function sincronizarInputsValores() {
-  ['UA', 'UF', 'NAFTA', 'DOLAR'].forEach(tipo => {
+  ['UA', 'UF', 'GAVET'].forEach(tipo => {
     const input = $('valor' + tipo);
     if (input) input.value = state.valores[tipo] ?? 0;
   });
@@ -360,7 +359,7 @@ function init() {
 
   sincronizarInputsValores();
 
-  ['UA', 'UF', 'NAFTA', 'DOLAR'].forEach(tipo => {
+  ['UA', 'UF', 'GAVET'].forEach(tipo => {
     const input = $('valor' + tipo);
 
     if (!input) return;
@@ -458,12 +457,12 @@ function renderResultados(resultados, meta) {
     contador.textContent = '0 resultados';
 
     tbody.innerHTML = `
-  <tr>
-    <td colspan="8" class="empty">
-      No se ha encontrado nada todavía.
-    </td>
-  </tr>
-`;
+      <tr>
+        <td colspan="8" class="empty">
+          No se ha encontrado nada todavía.
+        </td>
+      </tr>
+    `;
 
     return;
   }
