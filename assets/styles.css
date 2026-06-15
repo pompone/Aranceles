@@ -1282,3 +1282,228 @@ select:focus {
   border: 1px solid rgba(122, 167, 255, 0.45);
   color: #9cc0ff;
 }
+
+/* =========================================================
+   BOTÓN DE TEMA
+   ========================================================= */
+
+.theme-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.theme-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   MODO CLARO
+   ========================================================= */
+
+body.tema-claro {
+  --bg: #eef3f8;
+  --panel: #ffffff;
+  --panel2: #f5f8fc;
+  --line: #cbd5e1;
+  --text: #172033;
+  --muted: #5f6f85;
+  --accent: #159974;
+  --accent2: #4e79d9;
+  --danger: #d94b4b;
+  --shadow: 0 16px 42px rgba(31, 41, 55, 0.12);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #dceafe 0,
+      #eef3f8 38%,
+      #e7edf4 100%
+    );
+
+  color: var(--text);
+}
+
+body.tema-claro .card {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(246, 249, 253, 0.98)
+    );
+}
+
+body.tema-claro .header-card {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+body.tema-claro input,
+body.tema-claro select {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #172033;
+}
+
+body.tema-claro .results-table th {
+  background: #e9eff7;
+  color: #43516a;
+}
+
+body.tema-claro .results-table tbody tr:hover {
+  background: rgba(78, 121, 217, 0.08);
+}
+
+body.tema-claro .code,
+body.tema-claro .budget-top strong,
+body.tema-claro .total-box strong {
+  color: #172033;
+}
+
+body.tema-claro .budget-item,
+body.tema-claro .drive-box {
+  background: #f7f9fc;
+}
+
+body.tema-claro .btn-soft,
+body.tema-claro .chip {
+  background: #e7edf5;
+  color: #172033;
+}
+
+body.tema-claro .btn-outline {
+  border-color: #b8c5d6;
+  color: #172033;
+}
+
+body.tema-claro .empty-box {
+  border-color: #b9c5d4;
+}
+
+body.tema-claro .status-loading {
+  color: #365d9d;
+}
+
+body.tema-claro .app-footer {
+  color: #5f6f85;
+}
+
+body.tema-claro .app-footer a {
+  color: #157f63;
+}
+
+@media (max-width: 760px) {
+  .theme-button {
+    width: 100%;
+  }
+}
+
+@media print {
+  #btnTema {
+    display: none !important;
+  }
+}
+/* =========================================================
+   AJUSTES DE CONTRASTE PARA MODO CLARO
+   ========================================================= */
+
+body.tema-claro .status-ok {
+  color: #08785d;
+}
+
+body.tema-claro .status-ok .status-icon {
+  background: #d8f5eb;
+  border-color: #36b992;
+  color: #08785d;
+}
+
+body.tema-claro .status-error {
+  color: #a72f2f;
+}
+
+body.tema-claro .status-error .status-icon {
+  background: #fde3e3;
+  border-color: #dc6b6b;
+  color: #a72f2f;
+}
+
+body.tema-claro .status-loading {
+  color: #2f5f9f;
+}
+
+body.tema-claro .status-loading .status-icon {
+  background: #e2ecfb;
+  border-color: #7fa3d6;
+  color: #2f5f9f;
+}
+
+body.tema-claro .pill {
+  background: #d9f5eb;
+  color: #08785d;
+  border-color: #6ac9aa;
+}
+
+body.tema-claro .chip {
+  background: #edf2f8;
+  border-color: #8ca0ba;
+  color: #16233a;
+}
+
+body.tema-claro .chip:hover {
+  background: #dfe8f3;
+  border-color: #159974;
+}
+
+body.tema-claro .btn-soft {
+  background: #e2e9f2;
+  border: 1px solid #c0cad8;
+  color: #172033;
+}
+
+body.tema-claro .btn-soft:hover {
+  background: #d5dfeb;
+  border-color: #9baabd;
+}
+
+body.tema-claro .btn-outline {
+  background: #ffffff;
+  border-color: #8294aa;
+  color: #172033;
+}
+
+body.tema-claro .btn-primary {
+  background: linear-gradient(
+    135deg,
+    #1fb98c,
+    #128064
+  );
+  color: #ffffff;
+}
+
+body.tema-claro .add-btn {
+  background: #159974;
+  color: #ffffff;
+}
+
+body.tema-claro .remove {
+  background: #fff4f4;
+  border-color: #d96d6d;
+  color: #a52f2f;
+}
+
+body.tema-claro .overline {
+  color: #08785d;
+}
+
+body.tema-claro .field span {
+  color: #40526a;
+}
+
+body.tema-claro .result-header small,
+body.tema-claro .muted,
+body.tema-claro .budget-meta {
+  color: #53657c;
+}

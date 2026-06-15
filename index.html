@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/tour.css">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b1220">
 </head>
 
 <body>
@@ -31,6 +33,7 @@
     </div>
 
       <div class="header-actions">
+
         <button
           id="btnAyuda"
           class="btn btn-soft help-button"
@@ -40,6 +43,17 @@
         >
           <span class="help-icon">?</span>
           <span>Ayuda</span>
+        </button>
+
+        <button
+          id="btnTema"
+          class="btn btn-soft theme-button"
+          type="button"
+          aria-label="Cambiar tema"
+          title="Cambiar tema"
+        >
+          <span id="iconoTema" class="theme-icon">☀</span>
+          <span id="textoTema">Modo claro</span>
         </button>
 
         <div class="header-card">
@@ -326,5 +340,7 @@
   <script src="assets/data.js"></script>
   <script src="assets/app.js"></script>
   <script src="assets/tour.js"></script>
+  <script src="assets/tema.js"></script>
+  <script src="assets/pwa.js"></script>
 </body>
 </html>
