@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/tour.css">
+  <link rel="stylesheet" href="assets/header-fix.css?v=1.0.1">
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0b1220">
@@ -32,36 +33,35 @@
       </div>
     </div>
 
-      <div class="header-actions">
+    <div class="header-actions">
+      <button
+        id="btnAyuda"
+        class="btn btn-soft help-button"
+        type="button"
+        aria-label="Abrir ayuda"
+        title="Abrir ayuda"
+      >
+        <span class="help-icon">?</span>
+        <span>Ayuda</span>
+      </button>
 
-        <button
-          id="btnAyuda"
-          class="btn btn-soft help-button"
-          type="button"
-          aria-label="Abrir ayuda"
-          title="Abrir ayuda"
-        >
-          <span class="help-icon">?</span>
-          <span>Ayuda</span>
-        </button>
+      <button
+        id="btnTema"
+        class="btn btn-soft theme-button"
+        type="button"
+        aria-label="Cambiar tema"
+        title="Cambiar tema"
+      >
+        <span id="iconoTema" class="theme-icon">☀</span>
+        <span id="textoTema">Modo claro</span>
+      </button>
 
-        <button
-          id="btnTema"
-          class="btn btn-soft theme-button"
-          type="button"
-          aria-label="Cambiar tema"
-          title="Cambiar tema"
-        >
-          <span id="iconoTema" class="theme-icon">☀</span>
-          <span id="textoTema">Modo claro</span>
-        </button>
-
-        <div class="header-card">
-          <span>Catálogo</span>
-          <strong id="totalCatalogo">0</strong>
-          <small>ítems importados</small>
-        </div>
+      <div class="header-card">
+        <span>Catálogo</span>
+        <strong id="totalCatalogo">0</strong>
+        <small>ítems importados</small>
       </div>
+    </div>
   </header>
 
   <main class="app-shell">
@@ -107,37 +107,21 @@
       <div class="examples">
         <span>Probar:</span>
 
-        <button type="button" class="chip" data-code="F A">
-          F A
-        </button>
-
-        <button type="button" class="chip" data-code="C A">
-          C A
-        </button>
-
-        <button type="button" class="chip" data-code="M R">
-          M R
-        </button>
-
-        <button type="button" class="chip" data-code="A 02">
-          A 02
-        </button>
+        <button type="button" class="chip" data-code="F A">F A</button>
+        <button type="button" class="chip" data-code="C A">C A</button>
+        <button type="button" class="chip" data-code="M R">M R</button>
+        <button type="button" class="chip" data-code="A 02">A 02</button>
       </div>
 
       <div class="result-header">
         <div>
-          <strong id="textoResultados">
-            Sin búsqueda activa
-          </strong>
-
+          <strong id="textoResultados">Sin búsqueda activa</strong>
           <small id="ayudaResultados">
             Escribí al menos una letra o número del código.
           </small>
         </div>
 
-        <span id="contadorResultados" class="pill">
-          0 resultados
-        </span>
+        <span id="contadorResultados" class="pill">0 resultados</span>
       </div>
 
       <div class="table-wrap">
@@ -178,35 +162,17 @@
         <div class="values-grid">
           <label class="field">
             <span>UA</span>
-
-            <input
-              id="valorUA"
-              type="number"
-              step="0.01"
-              readonly
-            >
+            <input id="valorUA" type="number" step="0.01" readonly>
           </label>
 
           <label class="field">
             <span>UF</span>
-
-            <input
-              id="valorUF"
-              type="number"
-              step="0.01"
-              readonly
-            >
+            <input id="valorUF" type="number" step="0.01" readonly>
           </label>
 
           <label class="field">
             <span>GAVET</span>
-
-            <input
-              id="valorGAVET"
-              type="number"
-              step="0.01"
-              readonly
-            >
+            <input id="valorGAVET" type="number" step="0.01" readonly>
           </label>
         </div>
 
@@ -221,7 +187,6 @@
       </section>
 
       <section class="card budget-card">
-
         <div class="print-budget-header">
           <img
             src="assets/logo-rionegro.jpg"
@@ -235,7 +200,6 @@
             </h1>
           </div>
         </div>
-
 
         <div class="section-title compact">
           <div>
@@ -252,21 +216,19 @@
           </button>
         </div>
 
-          <label class="field laboratory-field">
-            <span>Destino del presupuesto</span>
+        <label class="field laboratory-field">
+          <span>Destino del presupuesto</span>
 
-            <select id="laboratorioSeleccionado">
-              <option value="">Seleccione una opción</option>
-              <option value="Viedma">Viedma</option>
-              <option value="Villa Regina">Villa Regina</option>
-              <option value="Cinco Saltos">Cinco Saltos</option>
-              <option value="Otros">Otros</option>
-            </select>
-          </label>
+          <select id="laboratorioSeleccionado">
+            <option value="">Seleccione una opción</option>
+            <option value="Viedma">Viedma</option>
+            <option value="Villa Regina">Villa Regina</option>
+            <option value="Cinco Saltos">Cinco Saltos</option>
+            <option value="Otros">Otros</option>
+          </select>
+        </label>
 
-          <div id="listaPresupuesto" class="budget-list">
-
-
+        <div id="listaPresupuesto" class="budget-list">
           <div class="empty-box">
             Todavía no agregaste análisis.
           </div>
@@ -274,10 +236,7 @@
 
         <div class="total-box">
           <span>Total estimado</span>
-
-          <strong id="totalPresupuesto">
-            $ 0,00
-          </strong>
+          <strong id="totalPresupuesto">$ 0,00</strong>
         </div>
 
         <div class="actions">
@@ -304,7 +263,6 @@
   <footer class="app-footer">
     <p>
       Desarrollado por
-
       <a
         href="https://pompone.github.io/CV_Pompone.github.io/"
         target="_blank"
@@ -321,10 +279,7 @@
 
       <div>
         <strong>Atención</strong>
-
-        <p>
-          Los valores de Aranceles no han sido actualizados todavía.
-        </p>
+        <p>Los valores de Aranceles no han sido actualizados todavía.</p>
       </div>
 
       <button
