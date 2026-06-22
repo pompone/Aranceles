@@ -1,0 +1,29 @@
+/* Ajuste estable del encabezado en pantallas de escritorio */
+@media (min-width: 761px) {
+  .app-header {
+    align-items: center;
+  }
+
+  .brand-block {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .brand-block > div {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .app-header h1 {
+    white-space: nowrap;
+    font-size: clamp(28px, 3.2vw, 48px);
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+  }
+
+  .theme-button {
+    min-width: 143px;
+  }
+}
