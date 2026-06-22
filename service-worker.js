@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0.3";
+const APP_VERSION = "1.0.4";
 const CACHE_NAME = `aranceles-${APP_VERSION}`;
 
 const ARCHIVOS_CACHE = [
@@ -8,7 +8,7 @@ const ARCHIVOS_CACHE = [
 
   "./assets/styles.css",
   "./assets/tour.css",
-  "./assets/header-fix.css?v=1.0.1",
+  "./assets/header-fix.css?v=1.0.3",
 
   "./assets/data.js",
   "./assets/app.js",
