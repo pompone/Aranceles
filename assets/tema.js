@@ -35,8 +35,21 @@ function alternarTema() {
   aplicarTema(nuevoTema);
 }
 
+function estabilizarBotonTema(botonTema) {
+  if (!botonTema) {
+    return;
+  }
+
+  botonTema.style.width = "142px";
+  botonTema.style.minWidth = "142px";
+  botonTema.style.paddingInline = "8px";
+  botonTema.style.flexShrink = "0";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const botonTema = document.getElementById("btnTema");
+
+  estabilizarBotonTema(botonTema);
 
   const temaGuardado =
     localStorage.getItem(CLAVE_TEMA) || "oscuro";
