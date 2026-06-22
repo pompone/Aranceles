@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0.1";
+const APP_VERSION = "1.0.2";
 const CACHE_NAME = `aranceles-${APP_VERSION}`;
 
 const ARCHIVOS_CACHE = [
@@ -69,18 +69,10 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  /*
-   * Las solicitudes externas, como Google Sheets,
-   * siguen consultándose directamente por Internet.
-   */
   if (url.origin !== self.location.origin) {
     return;
   }
 
-  /*
-   * Para la navegación intentamos obtener primero
-   * la versión más reciente de Internet.
-   */
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
@@ -99,11 +91,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  /*
-   * Para CSS, JS, imágenes y demás archivos:
-   * usamos primero la caché y recurrimos a Internet
-   * cuando el archivo no está guardado.
-   */
   event.respondWith(
     caches.match(request).then((respuestaCache) => {
       if (respuestaCache) {
