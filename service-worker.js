@@ -1,4 +1,4 @@
-```javascript
+
 const APP_VERSION = "1.0.5";
 const CACHE_NAME = `aranceles-${APP_VERSION}`;
 
@@ -127,4 +127,3 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
-```
