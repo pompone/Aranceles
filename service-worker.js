@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0.6";
+const APP_VERSION = "1.0.7";
 const CACHE_NAME = `aranceles-${APP_VERSION}`;
 
 const ARCHIVOS_CACHE = [
@@ -24,11 +24,6 @@ const ARCHIVOS_CACHE = [
   "./assets/icons/icon-512.png"
 ];
 
-/* =========================================================
-   INSTALACIÓN
-   Descarga los archivos de la versión actual
-   ========================================================= */
-
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
@@ -37,11 +32,6 @@ self.addEventListener("install", (event) => {
       .then(() => self.skipWaiting())
   );
 });
-
-/* =========================================================
-   ACTIVACIÓN
-   Elimina las cachés de versiones anteriores
-   ========================================================= */
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
@@ -57,10 +47,6 @@ self.addEventListener("activate", (event) => {
       .then(() => self.clients.claim())
   );
 });
-
-/* =========================================================
-   PETICIONES
-   ========================================================= */
 
 self.addEventListener("fetch", (event) => {
   const request = event.request;
