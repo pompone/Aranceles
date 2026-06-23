@@ -1,81 +1,105 @@
-function normalizarTextoBusqueda(valor) {
-  return String(valor || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase()
-    .trim();
-}
+(() => {
+  const tituloPrincipal = document.querySelector(".brand-block h1");
 
-function filtrarYRenderizarMejorado() {
-  const texto = $("codigoBusqueda").value.trim();
-  const qCodigo = normalizarCodigo(texto);
-  const qTexto = normalizarTextoBusqueda(texto);
-  const anexo = $("filtroAnexo").value;
+  if (tituloPrincipal) {
+    tituloPrincipal.textContent = "Buscador de Análisis";
+  }
 
-  if (!qTexto) {
-    renderResultados([], { estado: "inicial" });
+  const inputOriginal = document.getElementById("codigoBusqueda");
+  const selectOriginal = document.getElementById("filtroAnexo");
+
+  if (!inputOriginal || !selectOriginal) {
     return;
   }
 
-  const resultados = state.catalogo.filter((item) => {
-    const codigo = String(item.codigoNormalizado || "");
-    const descripcion = normalizarTextoBusqueda(item.descripcion);
+  const inputBusqueda = inputOriginal.cloneNode(true);
+  const selectAnexo = selectOriginal.cloneNode(true);
 
-    const matchCodigo = codigo.includes(qCodigo);
-    const matchDescripcion = descripcion.includes(qTexto);
-    const matchAnexo = anexo === "TODOS" || item.anexo === anexo;
+  inputOriginal.replaceWith(inputBusqueda);
+  selectOriginal.replaceWith(selectAnexo);
 
-    return (matchCodigo || matchDescripcion) && matchAnexo;
-  });
-
-  resultados.sort((a, b) => {
-    const codigoA = String(a.codigoNormalizado || "");
-    const codigoB = String(b.codigoNormalizado || "");
-    const descripcionA = normalizarTextoBusqueda(a.descripcion);
-    const descripcionB = normalizarTextoBusqueda(b.descripcion);
-
-    const prioridad = (codigo, descripcion) => {
-      if (codigo === qCodigo) return 0;
-      if (descripcion === qTexto) return 1;
-      if (codigo.startsWith(qCodigo)) return 2;
-      if (descripcion.startsWith(qTexto)) return 3;
-      return 4;
-    };
-
-    return (
-      prioridad(codigoA, descripcionA) - prioridad(codigoB, descripcionB) ||
-      descripcionA.localeCompare(descripcionB, "es") ||
-      codigoA.localeCompare(codigoB)
-    );
-  });
-
-  renderResultados(resultados, {
-    estado: "busqueda",
-    texto
-  });
-
-  const ayuda = $("ayudaResultados");
-  if (ayuda) {
-    ayuda.textContent = resultados.length
-      ? "Se muestran coincidencias por código o descripción. Usá Agregar en los análisis que necesitás."
-      : "No encontré coincidencias. Probá con otro código o con una palabra de la descripción.";
+  function normalizarTextoBusqueda(valor) {
+    return String(valor || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toUpperCase()
+      .trim();
   }
-}
 
-const inputBusquedaAnalisis = $("codigoBusqueda");
-const selectAnexoBusqueda = $("filtroAnexo");
+  function buscar() {
+    const texto = inputBusqueda.value.trim();
+    const qCodigo = normalizarCodigo(texto);
+    const qTexto = normalizarTextoBusqueda(texto);
+    const anexo = selectAnexo.value;
 
-inputBusquedaAnalisis.addEventListener("input", filtrarYRenderizarMejorado);
-selectAnexoBusqueda.addEventListener("change", filtrarYRenderizarMejorado);
+    if (!qTexto) {
+      renderResultados([], {
+        estado: "inicial"
+      });
+      return;
+    }
 
-document.querySelectorAll(".chip").forEach((boton) => {
-  boton.addEventListener("click", () => {
-    window.setTimeout(filtrarYRenderizarMejorado, 0);
+    const resultados = state.catalogo.filter((item) => {
+      const codigo = String(item.codigoNormalizado || "");
+      const descripcion = normalizarTextoBusqueda(item.descripcion);
+
+      const coincideCodigo = codigo.includes(qCodigo);
+      const coincideDescripcion = descripcion.includes(qTexto);
+      const coincideAnexo = anexo === "TODOS" || item.anexo === anexo;
+
+      return (
+        (coincideCodigo || coincideDescripcion) &&
+        coincideAnexo
+      );
+    });
+
+    resultados.sort((a, b) => {
+      const descripcionA = normalizarTextoBusqueda(a.descripcion);
+      const descripcionB = normalizarTextoBusqueda(b.descripcion);
+
+      const aEmpieza = descripcionA.startsWith(qTexto) ? 0 : 1;
+      const bEmpieza = descripcionB.startsWith(qTexto) ? 0 : 1;
+
+      return (
+        aEmpieza - bEmpieza ||
+        descripcionA.localeCompare(descripcionB, "es")
+      );
+    });
+
+    renderResultados(resultados, {
+      estado: "busqueda",
+      texto
+    });
+
+    const ayuda = document.getElementById("ayudaResultados");
+
+    if (ayuda) {
+      ayuda.textContent = resultados.length
+        ? "Se muestran coincidencias por código o descripción. Usá Agregar en los análisis que necesitás."
+        : "No encontré coincidencias. Probá con otro código o con una palabra de la descripción.";
+    }
+  }
+
+  inputBusqueda.addEventListener("input", buscar);
+  selectAnexo.addEventListener("change", buscar);
+
+  document.querySelectorAll(".chip").forEach((boton) => {
+    boton.addEventListener("click", () => {
+      inputBusqueda.value = boton.dataset.code || "";
+      buscar();
+      inputBusqueda.focus();
+    });
   });
-});
 
-$("limpiarBusqueda").addEventListener("click", () => {
-  window.setTimeout(filtrarYRenderizarMejorado, 0);
-});
+  const botonLimpiar = document.getElementById("limpiarBusqueda");
 
-filtrarYRenderizarMejorado();
+  if (botonLimpiar) {
+    botonLimpiar.addEventListener("click", () => {
+      inputBusqueda.value = "";
+      selectAnexo.value = "TODOS";
+      buscar();
+    });
+  }
+
+  buscar();
+})();
