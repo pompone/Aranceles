@@ -1,5 +1,4 @@
-
-const APP_VERSION = "1.0.5";
+const APP_VERSION = "1.0.6";
 const CACHE_NAME = `aranceles-${APP_VERSION}`;
 
 const ARCHIVOS_CACHE = [
@@ -75,10 +74,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  /*
-   * Para documentos HTML se intenta primero obtener
-   * la versión más reciente desde la red.
-   */
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
@@ -97,10 +92,6 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  /*
-   * Para los demás recursos se utiliza primero la caché.
-   * Si el archivo no existe, se descarga y se almacena.
-   */
   event.respondWith(
     caches.match(request).then((respuestaCache) => {
       if (respuestaCache) {
