@@ -62,11 +62,11 @@ function filtrarYRenderizarMejorado() {
   }
 }
 
-const campoBusqueda = $("codigoBusqueda");
-const filtroAnexoBusqueda = $("filtroAnexo");
+const inputBusquedaAnalisis = $("codigoBusqueda");
+const selectAnexoBusqueda = $("filtroAnexo");
 
-campoBusqueda.addEventListener("input", filtrarYRenderizarMejorado);
-filtroAnexoBusqueda.addEventListener("change", filtrarYRenderizarMejorado);
+inputBusquedaAnalisis.addEventListener("input", filtrarYRenderizarMejorado);
+selectAnexoBusqueda.addEventListener("change", filtrarYRenderizarMejorado);
 
 document.querySelectorAll(".chip").forEach((boton) => {
   boton.addEventListener("click", () => {
